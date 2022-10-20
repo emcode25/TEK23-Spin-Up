@@ -2,8 +2,8 @@
 TEK PROS code for the 2022-23 VEX season.
 
 ## Important Links
-Trello<br>
-PiLons odometry paper
+[Trello](https://trello.com/b/5u5N1G0Y/spin-up-22-23)<br>
+PiLons odometry [paper](http://thepilons.ca/wp-content/uploads/2018/10/Tracking.pdf)<br>
 ### Various Vex Articles
 
 ## Goals
