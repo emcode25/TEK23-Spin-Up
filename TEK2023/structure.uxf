@@ -23,8 +23,8 @@
 + autoShoot(bool)  : void
 + pollController() : void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>876</x><y>144</y><w>240</w><h>252</h></coordinates><panel_attributes>TankDrivetrain
 --
-- left : Motor[1...*]
-- right : Motor[1...*]
+- left : array&lt;Motor, 1...*&gt;
+- right : array&lt;Motor, 1...*&gt;
 - drivePID : PIDConstants
 - turnPID : PIDConstants
 - PIDControl : PIDController
@@ -34,8 +34,8 @@
 + turnLeft(int) : void
 + driveForward(double, int) : void
 + turnTo(double, int) : void
-+ getLeft() : Motor[1...*]
-+ getRight() : Motor[1...*]</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>912</x><y>12</y><w>168</w><h>84</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
++ getLeft() : array&lt;Motor, 1...*&gt;
++ getRight() : array&lt;Motor, 1...*&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>912</x><y>12</y><w>168</w><h>84</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
 /Drivetrain/
 --
 + drive(int) : void
