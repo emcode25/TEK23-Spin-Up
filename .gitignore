@@ -54,3 +54,22 @@
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode
+
+./TEK2023/structure.uxf
+
+# Compiled Object files
+*.o
+*.obj
+
+# Executables
+*.bin
+*.elf
+
+# PROS
+./bin/
+./.vscode/
+./compile_commands.json
+./temp.log
+./temp.errors
+./*.ini
+./.d/
