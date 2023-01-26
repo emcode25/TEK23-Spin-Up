@@ -118,4 +118,5 @@ m1=1</panel_attributes><additional_attributes>110;10;10;10</additional_attribute
 m1=1</panel_attributes><additional_attributes>10;140;210;10</additional_attributes></element><element><id>Relation</id><coordinates><x>288</x><y>384</y><w>48</w><h>132</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>396</x><y>384</y><w>108</w><h>132</h></coordinates><panel_attributes>lt=&lt;-
 m1=1</panel_attributes><additional_attributes>10;90;70;10</additional_attributes></element><element><id>Relation</id><coordinates><x>636</x><y>552</y><w>48</w><h>192</h></coordinates><panel_attributes>lt=&lt;-
-m1=1</panel_attributes><additional_attributes>10;140;10;10</additional_attributes></element></diagram>
+m1=1</panel_attributes><additional_attributes>10;140;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>444</x><y>96</y><w>228</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1</panel_attributes><additional_attributes>10;10;170;40</additional_attributes></element></diagram>
