@@ -4,7 +4,6 @@
       "name": "PROS Project",
       "includePath": [
         "${workspaceFolder}/**",
-        "c:\\Users\\Evan\\TEK2023\\include",
         "c:\\Users\\Evan\\TEK23-Spin-Up\\TEK2023\\include"
       ],
       "defines": [
