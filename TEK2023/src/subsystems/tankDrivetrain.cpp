@@ -3,44 +3,47 @@
 #include <cmath>
 #include <cstdarg>
 
-template<size_t N>
-TankDrivetrain<N>::TankDrivetrain(std::array<pros::Motor, N>& l, 
-        std::array<pros::Motor, N>& r, PIDConstants drivePID, PIDConstants turnPID)
+TankDrivetrain::TankDrivetrain(pros::Motor* l, pros::Motor* r)
 {
     left = r;
     right = r;
-    this->drivePID = drivePID;
-    this->turnPID  = turnPID;
 }
 
-template<size_t N>
-void TankDrivetrain<N>::drive(int mV)
+void TankDrivetrain::drive(int mV)
 {
-    for(int i = 0; i < N; ++i)
+    for(int i = 0; i < 3; ++i)
     {
-        left.at(i).move_voltage(mV);
-        right.at(i).move_voltage(mV);
+        left[i].move_voltage(mV);
+        right[i].move_voltage(mV);
     }
 }
 
-template<size_t N>
-void TankDrivetrain<N>::turnLeft(int mV)
+void TankDrivetrain::turnLeft(int mV)
 {
-    for(int i = 0; i < N; ++i)
+    for(int i = 0; i < 3; ++i)
     {
-        left.at(i).move_voltage(-mV);
-        right.at(i).move_voltage(mV);
+        left[i].move_voltage(-mV);
+        right[i].move_voltage(mV);
     }
 }
 
-template<size_t N>
-std::array<pros::Motor, N> TankDrivetrain<N>::getLeft()
+pros::Motor* TankDrivetrain::getLeft()
 {
     return left;
 }
 
-template<size_t N>
-std::array<pros::Motor, N> TankDrivetrain<N>::getRight()
+pros::Motor* TankDrivetrain::getRight()
 {
     return right;
+}
+
+void TankDrivetrain::tankControl(pros::Controller& c)
+{
+    int l = (c.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) * 120 / 127) * 100;
+    int r = (c.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y) * 120 / 127) * 100;
+    for(int i = 0; i < 3; ++i)
+    {
+        left[i].move_voltage(l);
+        right[i].move_voltage(r);
+    }
 }

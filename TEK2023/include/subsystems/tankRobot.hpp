@@ -6,11 +6,10 @@
 #include "odometry.hpp"
 #include "drivetrain.hpp"
 
-template <size_t N>
 class TankRobot
 {
     public:
-        TankRobot(TankDrivetrain<N> d, Odometry* odom, TeamColor tc, pros::Vision* v, pros::Optical* o);
+        TankRobot(TankDrivetrain d, Odometry* odom, TeamColor tc, pros::Vision* v, pros::Optical* o, PIDConstants drive, PIDConstants turn);
         void goTo(Coordinate c, double angle, int timeout);
         void driveTo(Coordinate c, int timeout);
         void turnTo(double angle, int timeout);
@@ -19,7 +18,7 @@ class TankRobot
         void pollController(bool dualDriver);
 
     private:
-        TankDrivetrain<N> drivetrain;
+        TankDrivetrain drivetrain;
         Odometry* odometry;
         pros::Controller driver;
         pros::Controller partner;

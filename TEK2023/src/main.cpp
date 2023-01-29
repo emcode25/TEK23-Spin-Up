@@ -1,4 +1,31 @@
 #include "main.h"
+#include "subsystems/tankRobot.hpp"
+#include <cstdlib>
+
+constexpr int INERTIAL_PORT = 1;
+constexpr int VISION_PORT = 2;
+constexpr int OPTICAL_PORT = 3;
+
+constexpr char XENCODER_TOP_PORT = 'A';
+constexpr char XENCODER_BOTTOM_PORT = 'B';
+constexpr char YENCODER_TOP_PORT = 'C';
+constexpr char YENCODER_BOTTOM_PORT = 'D';
+
+constexpr TeamColor TEAM_COLOR = Blue;
+
+const PIDConstants drivePID = {0, 0, 0};
+const PIDConstants turnPID = {0, 0, 0};
+pros::Motor* leftSide;
+pros::Motor* rightSide;
+pros::Vision vision(VISION_PORT, pros::E_VISION_ZERO_CENTER);
+pros::Optical optical(OPTICAL_PORT);
+TankDrivetrain* drivetrain;
+TankRobot* robot;
+pros::Controller driver(pros::E_CONTROLLER_MASTER);
+pros::Controller partner(pros::E_CONTROLLER_PARTNER);
+
+TeamColor c = TEAM_COLOR;
+Odometry odom(XENCODER_TOP_PORT, XENCODER_BOTTOM_PORT, YENCODER_TOP_PORT, YENCODER_BOTTOM_PORT, INERTIAL_PORT, 2);
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -8,7 +35,10 @@
  */
 void initialize()
 {
-	
+	leftSide  = (pros::Motor*) malloc(sizeof(pros::Motor) * 3);
+	rightSide = (pros::Motor*) malloc(sizeof(pros::Motor) * 3);
+	drivetrain = new TankDrivetrain(leftSide, rightSide);
+	robot = new TankRobot(*drivetrain, &odom, TEAM_COLOR, &vision, &optical, drivePID, turnPID);
 }
 
 /**
@@ -66,19 +96,13 @@ void autonomous()
  */
 void opcontrol()
 {
-	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	pros::Motor left_mtr(1);
-	pros::Motor right_mtr(2);
+	while(true)
+	{
+		robot->pollController(false);
 
-	while (true) {
-		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
-		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
-		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
-		int left = master.get_analog(ANALOG_LEFT_Y);
-		int right = master.get_analog(ANALOG_RIGHT_Y);
-
-		left_mtr = left;
-		right_mtr = right;
 		pros::delay(20);
 	}
+
+	delete robot;
+	delete drivetrain;
 }

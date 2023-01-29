@@ -1,41 +1,42 @@
 #include "subsystems/tankRobot.hpp"
 
-template<size_t N>
-TankRobot<N>::TankRobot(TankDrivetrain<N> d, Odometry* odom, TeamColor tc, pros::Vision* v, pros::Optical* o) : drivetrain{d}, odometry{odom}, color{tc}, vision{v}, optical{o}
+TankRobot::TankRobot(TankDrivetrain d, Odometry* odom, TeamColor tc, pros::Vision* v, pros::Optical* o, PIDConstants drive, PIDConstants turn) : drivetrain{d}, odometry{odom}, color{tc}, vision{v}, optical{o}, driver{pros::Controller(pros::E_CONTROLLER_MASTER)}, partner{pros::Controller(pros::E_CONTROLLER_PARTNER)}, PIDControl{PIDController(drivePID)}, drivePID{drive}, turnPID{turn}
 {
-    driver = pros::Controller(pros::E_CONTROLLER_MASTER);
-    partner = pros::Controller(pros::E_CONTROLLER_PARTNER);
+    
 }
 
-template<size_t N>
-void TankRobot<N>::goTo(Coordinate c, double angle, int timeout)
+void TankRobot::goTo(Coordinate c, double angle, int timeout)
 {
     //Implement
     return;
 }
 
-template<size_t N>
-void TankRobot<N>::driveTo(Coordinate c, int timeout)
+void TankRobot::driveTo(Coordinate c, int timeout)
 {
-    PIDControl.goToTarget(drivetrain, c, odometry, timeout);
+    PIDControl.goToTarget(drivetrain, c, *odometry, timeout);
 }
 
-template<size_t N>
-void TankRobot<N>::turnTo(double angle, int timeout)
+void TankRobot::turnTo(double angle, int timeout)
 {
-    PIDControl.goToAngle(drivetrain, angle, odometry, timeout);
+    PIDControl.goToAngle(drivetrain, angle, *odometry, timeout);
 }
 
-template<size_t N>
-void TankRobot<N>::autoAim(bool useVision)
+void TankRobot::autoAim(bool useVision)
 {
     //Implement
     return;
 }
 
-template<size_t N>
-void TankRobot<N>::pollController(bool dualDriver)
+void TankRobot::pollController(bool dualDriver)
 {
-    //Implement
-    return;
+    drivetrain.tankControl(driver);
+
+    if(!dualDriver)
+    {
+        //ENDGAME (X)
+        //FLYWHEEL ON(LT)
+        //SHOOT (LB)
+        //INTAKE (RB)
+        //INTAKE  BACK (RT)
+    }
 }

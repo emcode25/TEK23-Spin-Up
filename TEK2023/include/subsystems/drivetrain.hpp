@@ -12,24 +12,22 @@ class Drivetrain
         virtual void turnLeft(int mV);
 };
 
-template <size_t N>
 class TankDrivetrain : Drivetrain
 {
     public:
-        TankDrivetrain(std::array<pros::Motor, N>& l, 
-                std::array<pros::Motor, N>& r, PIDConstants drive, 
-                PIDConstants turn);
+        TankDrivetrain(pros::Motor* l, pros::Motor* r);
         
         void drive(int mV);
         void turnLeft(int mV);
+        void tankControl(pros::Controller& c);
         //void driveForward(double inches, int timeout);
         //void turnTo(double angles, int timeout);
-        std::array<pros::Motor, N> getLeft();
-        std::array<pros::Motor, N> getRight();
+        pros::Motor* getLeft();
+        pros::Motor* getRight();
 
     private:
-        std::array<pros::Motor, N> left;
-        std::array<pros::Motor, N> right;
+        pros::Motor* left;
+        pros::Motor* right;
 };
 
 #endif

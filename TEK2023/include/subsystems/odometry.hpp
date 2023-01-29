@@ -33,9 +33,9 @@ class PIDController
     public:
         PIDController(PIDConstants pidc);
         void setPID(PIDConstants pidc);
-        void goToTarget(TankDrivetrain<6>& d, Coordinate target, 
+        void goToTarget(TankDrivetrain& d, Coordinate target, 
                 Odometry& odom, int timeout);
-        void goToAngle(TankDrivetrain<6>& t, double angle, 
+        void goToAngle(TankDrivetrain& t, double angle, 
                 Odometry& odom, int timeout);
 
     private:
